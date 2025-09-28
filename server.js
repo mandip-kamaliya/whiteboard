@@ -1,11 +1,19 @@
 import express from "express";
 import path, { dirname } from "path";
-const app = express();
+
 import { fileURLToPath } from "url";
-const PORT = process.env.PORT || 3000;
+
+import { createServer } from "http";
+import { Server } from "socket.io";
+
+const app = express();
+const httpServer = createServer(app);
+const io = new Server(httpServer);
 
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = dirname(__filename);
+
+const PORT = process.env.PORT || 3000;
 
 app.use(express.static(path.join(__dirname,"public")));
 
