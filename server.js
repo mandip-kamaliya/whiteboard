@@ -29,10 +29,14 @@ io.on("connection",(socket)=>{
         socket.join(boardId);
         console.log(`User ${socket.id} joined board: ${boardId}`);
         });
-        
-    socket.on("draw_event",(data)=>{
-        socket.to(boardId).emit('draw_event_received', data);
-    
+
+     // A user sends drawing data
+    socket.on("draw_event", (data) => {
+        // ✅ FIX: Use the boardId that comes with the drawing data
+        // We expect `data` to be an object like { boardId: "...", ...drawingData }
+        if (data.boardId) {
+            socket.to(data.boardId).emit('draw_event_received', data);
+        }
     });
 
      socket.on('disconnect', () => {
