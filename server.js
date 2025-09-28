@@ -17,14 +17,13 @@ const PORT = process.env.PORT || 3000;
 
 app.use(express.static(path.join(__dirname,"public")));
 
-app.listen(PORT,()=>console.log(`server is listening at port number ${PORT}`));
 
 app.get("/board/:boardId",(req,res)=>{
     res.sendFile(path.join(__dirname,"public",index.html));
 })
 
 io.on("connection",(socket)=>{
-    console.log("a new user is connected!!!");
+    console.log("a new user is connected!!!",socket.id);
 
     socket.on("join_board",(boardId)=>{
         socket.join(boardId);
@@ -37,5 +36,9 @@ io.on("connection",(socket)=>{
      socket.on('disconnect', () => {
         console.log('🔥 A user disconnected:', socket.id);
     });
+});
+
+httpServer.listen(PORT, () => {
+    console.log(`🚀 Server is running on http://localhost:${PORT}`);
 });
 
