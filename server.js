@@ -29,9 +29,13 @@ io.on("connection",(socket)=>{
     socket.on("join_board",(boardId)=>{
         socket.join(boardId);
         console.log(`User ${socket.id} joined board: ${boardId}`);
-
+    socket.on("draw_event",(data)=>{
+        socket.to(boardId).emit('draw_event_received', data);
+    });
     });
 
-    socket.on
-})
+     socket.on('disconnect', () => {
+        console.log('🔥 A user disconnected:', socket.id);
+    });
+});
 
