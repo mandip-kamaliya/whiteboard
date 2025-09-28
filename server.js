@@ -23,3 +23,15 @@ app.get("/board/:boardId",(req,res)=>{
     res.sendFile(path.join(__dirname,"public",index.html));
 })
 
+io.on("connection",(socket)=>{
+    console.log("a new user is connected!!!");
+
+    socket.on("join_board",(boardId)=>{
+        socket.join(boardId);
+        console.log(`User ${socket.id} joined board: ${boardId}`);
+
+    });
+
+    socket.on
+})
+
