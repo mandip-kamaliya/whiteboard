@@ -37,5 +37,5 @@ canvas.addEventListener('mousemove', (e) => {
 
 canvas.addEventListener("mouseup",(e)=>{
     if(!isDrawing) return;
-    isDrawing = true ;
+    isDrawing = false ;
 })
