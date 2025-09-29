@@ -14,3 +14,10 @@ function drawRect(x,y,width,height){
     ctx.lineWidth = 2; 
     ctx.strokeRect(x, y, width, height);
 }
+
+canvas.addEventListener("mousedown",(e)=>{
+    isDrawing = true;
+    startX = e.offsetX;
+    startY = e.offsetY;
+});
+
