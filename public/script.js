@@ -8,3 +8,9 @@ function resizeCanvas(){
     canvas.width = window.innerWidth;
     canvas.height = window.innerHeight;
 }
+
+function drawRect(x,y,width,height){
+    ctx.strokeStyle = "black";
+    ctx.lineWidth = 2; 
+    ctx.strokeRect(x, y, width, height);
+}
