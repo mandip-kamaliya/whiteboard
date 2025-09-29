@@ -21,3 +21,16 @@ canvas.addEventListener("mousedown",(e)=>{
     startY = e.offsetY;
 });
 
+canvas.addEventListener('mousemove', (e) => {
+    if (!isDrawing) return;
+
+    // Clear the entire canvas to remove the previous frame's rectangle
+    ctx.clearRect(0, 0, canvas.width, canvas.height);
+
+    const currentX = e.offsetX;
+    const currentY = e.offsetY;
+    const width = currentX - startX;
+    const height = currentY - startY;
+    
+    drawRect(startX, startY, width, height);
+});
