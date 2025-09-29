@@ -39,3 +39,6 @@ canvas.addEventListener("mouseup",(e)=>{
     if(!isDrawing) return;
     isDrawing = false ;
 })
+
+window.addEventListener('resize', resizeCanvas);
+resizeCanvas();
