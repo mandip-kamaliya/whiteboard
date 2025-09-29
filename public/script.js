@@ -34,3 +34,8 @@ canvas.addEventListener('mousemove', (e) => {
     
     drawRect(startX, startY, width, height);
 });
+
+canvas.addEventListener("mouseup",(e)=>{
+    if(!isDrawing) return;
+    isDrawing = true ;
+})
