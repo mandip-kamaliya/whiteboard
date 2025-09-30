@@ -1,6 +1,8 @@
 const canvas = document.getElementById("whiteboard");
 const ctx = canvas.getContext("2d");
 
+const socket = io();
+
 let isDrawing = false;
 let startX,startY;
 
