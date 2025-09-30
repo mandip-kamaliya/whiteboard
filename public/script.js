@@ -45,6 +45,20 @@ canvas.addEventListener('mousemove', (e) => {
 canvas.addEventListener("mouseup",(e)=>{
     if(!isDrawing) return;
     isDrawing = false ;
+
+    const currentX = e.offsetX;
+    const currentY = e.offsetY;
+    const width = currentX - startX;
+    const height = currentY - startY;
+
+    const drawingData = {
+        boardId:boardId,
+        x:startX,
+        y:startY,
+        width:width,
+        height:height 
+    };
+    
 })
 
 window.addEventListener('resize', resizeCanvas);
