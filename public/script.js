@@ -3,6 +3,9 @@ const ctx = canvas.getContext("2d");
 
 const socket = io();
 
+const pathParts = window.location.pathname.split("/");
+const boardId = pathParts[pathParts.length - 1];
+
 let isDrawing = false;
 let startX,startY;
 
