@@ -58,7 +58,7 @@ canvas.addEventListener("mouseup",(e)=>{
         width:width,
         height:height 
     };
-    
+    socket.emit("draw_event",drawingData);
 })
 
 window.addEventListener('resize', resizeCanvas);
