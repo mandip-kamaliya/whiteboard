@@ -6,6 +6,8 @@ const socket = io();
 const pathParts = window.location.pathname.split("/");
 const boardId = pathParts[pathParts.length - 1];
 
+socket.emit("join_board",boardId);
+
 let isDrawing = false;
 let startX,startY;
 
