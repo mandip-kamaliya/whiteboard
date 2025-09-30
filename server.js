@@ -34,6 +34,8 @@ io.on("connection",(socket)=>{
     socket.on("draw_event", (data) => {
         // ✅ FIX: Use the boardId that comes with the drawing data
         // We expect `data` to be an object like { boardId: "...", ...drawingData }
+                console.log("Received draw event:", data); 
+
         if (data.boardId) {
             socket.to(data.boardId).emit('draw_event_received', data);
         }

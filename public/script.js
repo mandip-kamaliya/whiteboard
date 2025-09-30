@@ -58,6 +58,7 @@ canvas.addEventListener("mouseup",(e)=>{
         width:width,
         height:height 
     };
+    console.log("Sending drawing data:", drawingData);
     socket.emit("draw_event",drawingData);
 })
 
