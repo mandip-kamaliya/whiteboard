@@ -10,6 +10,7 @@ socket.emit("join_board",boardId);
 
 let isDrawing = false;
 let startX,startY;
+let drawings = [];
 
 function resizeCanvas(){
     canvas.width = window.innerWidth;
