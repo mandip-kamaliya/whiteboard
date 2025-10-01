@@ -44,6 +44,8 @@ canvas.addEventListener("mousedown",(e)=>{
 canvas.addEventListener('mousemove', (e) => {
     if (!isDrawing) return;
 
+    redrawCanvas();
+
     // Clear the entire canvas to remove the previous frame's rectangle
     ctx.clearRect(0, 0, canvas.width, canvas.height);
 
