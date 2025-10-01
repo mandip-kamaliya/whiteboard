@@ -12,6 +12,12 @@ let isDrawing = false;
 let startX,startY;
 let drawings = [];
 
+socket.on('draw_event_received', (data) => {
+    
+    drawings.push(data);
+    redrawCanvas();
+});
+
 function resizeCanvas(){
     canvas.width = window.innerWidth;
     canvas.height = window.innerHeight;
