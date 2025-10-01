@@ -32,7 +32,7 @@ function drawRect(x,y,width,height){
 function redrawCanvas(){
     ctx.clearRect(0,0,canvas.width,canvas.height);
 
-    drawings.forEach(drawing => drawRect(drawing));
+    drawings.forEach(drawing => {drawRect(drawing.x, drawing.y, drawing.width, drawing.height);});
 }
 
 canvas.addEventListener("mousedown",(e)=>{
@@ -47,7 +47,7 @@ canvas.addEventListener('mousemove', (e) => {
     redrawCanvas();
 
     // Clear the entire canvas to remove the previous frame's rectangle
-    ctx.clearRect(0, 0, canvas.width, canvas.height);
+    
 
     const currentX = e.offsetX;
     const currentY = e.offsetY;
@@ -74,6 +74,8 @@ canvas.addEventListener("mouseup",(e)=>{
         height:height 
     };
     console.log("Sending drawing data:", drawingData);
+    drawings.push(drawingData);
+    redrawCanvas();
     socket.emit("draw_event",drawingData);
 })
 
