@@ -23,6 +23,12 @@ function drawRect(x,y,width,height){
     ctx.strokeRect(x, y, width, height);
 }
 
+function redrawCanvas(){
+    ctx.clearRect(0,0,canvas.width,canvas.height);
+
+    drawings.forEach(drawing => drawRect(drawing));
+}
+
 canvas.addEventListener("mousedown",(e)=>{
     isDrawing = true;
     startX = e.offsetX;
