@@ -6,6 +6,8 @@ import { fileURLToPath } from "url";
 import { createServer } from "http";
 import { Server } from "socket.io";
 
+const boardDrawings = new Map();
+
 const app = express();
 const httpServer = createServer(app);
 const io = new Server(httpServer);
@@ -28,6 +30,14 @@ io.on("connection",(socket)=>{
     socket.on("join_board",(boardId)=>{
         socket.join(boardId);
         console.log(`User ${socket.id} joined board: ${boardId}`);
+            if(boardDrawings.has(boardId)) {
+            const existingDrawings = boardDrawings.get(boardId);
+            // Send each drawing one by one to the newly connected client
+            existingDrawings.forEach(drawingData => {
+                socket.emit('draw_event_received', drawingData);
+            });
+        }
+
         });
 
      // A user sends drawing data
