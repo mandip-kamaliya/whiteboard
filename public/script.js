@@ -20,6 +20,11 @@ socket.on('draw_event_received', (data) => {
     redrawCanvas();
 });
 
+socket.on('board_cleared', () => {
+    drawings = [];
+    redrawCanvas(); 
+});
+
 function resizeCanvas(){
     canvas.width = window.innerWidth;
     canvas.height = window.innerHeight;
