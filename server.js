@@ -32,7 +32,6 @@ io.on("connection",(socket)=>{
         console.log(`User ${socket.id} joined board: ${boardId}`);
             if(boardDrawings.has(boardId)) {
             const existingDrawings = boardDrawings.get(boardId);
-            // Send each drawing one by one to the newly connected client
             existingDrawings.forEach(drawingData => {
                 socket.emit('draw_event_received', drawingData);
             });
@@ -43,19 +42,24 @@ io.on("connection",(socket)=>{
      // A user sends drawing data
     socket.on("draw_event", (data) => {
         if (data.boardId) {
-            // --- NEW: Store the drawing event ---
             if (!boardDrawings.has(data.boardId)) {
                 boardDrawings.set(data.boardId, []);
             }
             boardDrawings.get(data.boardId).push(data);
-            // ------------------------------------
-
-            // Broadcast to other users
+            
             socket.to(data.boardId).emit('draw_event_received', data);
         }
     });
 
-  
+     socket.on('clear_board', (boardId) => {
+        
+        if (boardDrawings.has(boardId)) {
+            boardDrawings.set(boardId, []);
+        }
+        
+        
+        io.to(boardId).emit('board_cleared');
+    });
 
      socket.on('disconnect', () => {
         console.log('🔥 A user disconnected:', socket.id);
