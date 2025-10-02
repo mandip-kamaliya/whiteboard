@@ -1,6 +1,8 @@
 const canvas = document.getElementById("whiteboard");
 const ctx = canvas.getContext("2d");
 
+const clearBtn = document.getElementById('clearBtn');
+
 const socket = io();
 
 const pathParts = window.location.pathname.split("/");
@@ -41,6 +43,10 @@ canvas.addEventListener("mousedown",(e)=>{
     startY = e.offsetY;
 });
 
+clearBtn.addEventListener('click', () => {
+    
+    socket.emit('clear_board', boardId);
+});
 canvas.addEventListener('mousemove', (e) => {
     if (!isDrawing) return;
 
