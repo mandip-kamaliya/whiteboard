@@ -42,11 +42,15 @@ io.on("connection",(socket)=>{
 
      // A user sends drawing data
     socket.on("draw_event", (data) => {
-        // ✅ FIX: Use the boardId that comes with the drawing data
-        // We expect `data` to be an object like { boardId: "...", ...drawingData }
-             //   console.log("Received draw event:", data); 
-
         if (data.boardId) {
+            // --- NEW: Store the drawing event ---
+            if (!boardDrawings.has(data.boardId)) {
+                boardDrawings.set(data.boardId, []);
+            }
+            boardDrawings.get(data.boardId).push(data);
+            // ------------------------------------
+
+            // Broadcast to other users
             socket.to(data.boardId).emit('draw_event_received', data);
         }
     });
